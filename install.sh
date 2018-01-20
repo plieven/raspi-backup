@@ -27,10 +27,10 @@ cp -v raspi-backup.sh /usr/local/sbin/
 chmod 755 /usr/local/sbin/raspi-backup.sh
 echo
 echo Creating daily cronjob...
-HOUR=$[ ($RANDOM % 23) ]
+HOUR=$[ ($RANDOM % 8) ]
 MINUTE=$[ ($RANDOM % 59) ]
 
-CMDLINE="test -x /usr/local/sbin/raspi-backup.sh && /usr/local/sbin/raspi-backup.sh"
+CMDLINE="test -x /usr/local/sbin/raspi-backup.sh && /usr/local/sbin/raspi-backup.sh 2>&1 | logger -t raspi-backup.sh"
 
 cat > /etc/cron.d/raspi-backup << EOF
 $MINUTE $HOUR * * * root $CMDLINE
