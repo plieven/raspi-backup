@@ -35,6 +35,7 @@ blkid -c /dev/null -o value -s UUID /dev/mmcblk0p1 >$LIBDIR/mmcblk0p1.uuid
 blkid -c /dev/null -o value -s UUID /dev/mmcblk0p2 >$LIBDIR/mmcblk0p2.uuid
 blkid -c /dev/null -o value -s TYPE /dev/mmcblk0p1 >$LIBDIR/mmcblk0p1.fstype
 blkid -c /dev/null -o value -s TYPE /dev/mmcblk0p2 >$LIBDIR/mmcblk0p2.fstype
+ntptrace -m 1 >$LIBDIR/ntptrace
 END=$(date +%s)
 echo $END >$LIBDIR/BACKUPDATE
 echo $((END-START)) >$LIBDIR/BACKUPDURATION
