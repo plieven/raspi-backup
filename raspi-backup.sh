@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 err() { echo "ERR: $@" 1>&2; exit 1; }
 [ "$(id -u)" != "0" ] && err "This script must be run as root!"
 [ -e /etc/default/raspi-backup ] && . /etc/default/raspi-backup
