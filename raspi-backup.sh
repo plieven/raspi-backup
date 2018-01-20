@@ -35,6 +35,10 @@ blkid -c /dev/null -o value -s UUID /dev/mmcblk0p1 >$LIBDIR/mmcblk0p1.uuid
 blkid -c /dev/null -o value -s UUID /dev/mmcblk0p2 >$LIBDIR/mmcblk0p2.uuid
 blkid -c /dev/null -o value -s TYPE /dev/mmcblk0p1 >$LIBDIR/mmcblk0p1.fstype
 blkid -c /dev/null -o value -s TYPE /dev/mmcblk0p2 >$LIBDIR/mmcblk0p2.fstype
+blockdev --getsize64 /dev/mmcblk0p1 >$LIBDIR/mmcblk0p1.size
+blockdev --getsize64 /dev/mmcblk0p2 >$LIBDIR/mmcblk0p2.size
+df  -B1 --output=used / | tail -1 >$LIBDIR/mmcblk0p2.used
+df  -B1 --output=used /boot | tail -1 >$LIBDIR/mmcblk0p1.used
 ntptrace -m 1 >$LIBDIR/ntptrace
 END=$(date +%s)
 echo $END >$LIBDIR/BACKUPDATE
