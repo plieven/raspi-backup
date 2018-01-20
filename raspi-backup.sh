@@ -10,8 +10,12 @@ err() { echo "ERR: $@" 1>&2; exit 1; }
 
 #prechecks
 [ ! -e /dev/mmcblk0 ] && err "Device /dev/mmcblk0 not found!"
+[ ! -e /dev/mmcblk0p1 ] && err "Partition /dev/mmcblk0p1 not found!"
 [ ! -e /dev/mmcblk0p2 ] && err "Partition /dev/mmcblk0p2 not found!"
-[ -e /dev/mmcblk0p3 ] && err "Unexpected number of partitions on /dev/mmcblk0!"
+[ $(grep mmcblk0p /proc/partitions | wc -l) -ne 2 ] && err "Unexpected number of partitions on /dev/mmcblk0!"
+[ $(blkid -c /dev/null -o value -s TYPE /dev/mmcblk0p1) != "vfat" ] && err "/dev/mmcblk0p2 has not fstype vfat!"
+[ $(blkid -c /dev/null -o value -s TYPE /dev/mmcblk0p2) != "ext4" ] && err "/dev/mmcblk0p2 has not fstype ext4!"
+
 [ -n "$CHECK" ] && exit 0
 
 #checks
