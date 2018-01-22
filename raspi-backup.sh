@@ -6,7 +6,7 @@ err() { echo "ERR: $@" 1>&2; exit 1; }
 [ -e /etc/default/raspi-backup ] && . /etc/default/raspi-backup
 [ -z $LIBDIR ] && LIBDIR=/var/lib/raspi-backup
 [ -z $SSHKEY ] && SSHKEY=/etc/ssh/ssh_host_ed25519_key
-[ -z $RSYNCFLAGS ] && RSYNCFLAGS="-azHx --delete -M--fake-super --numeric-ids"
+[ -z $RSYNCFLAGS ] && RSYNCFLAGS="-azHSx --delete -M--fake-super --numeric-ids"
 
 #prechecks
 [ ! -e /dev/mmcblk0 ] && err "Device /dev/mmcblk0 not found!"
