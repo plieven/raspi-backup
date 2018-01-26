@@ -35,6 +35,7 @@ dd if=/dev/mmcblk0 of=$LIBDIR/mmcblk0.bootsector bs=512 count=1 2>/dev/null
 uptime -p >$LIBDIR/uptime
 uname -r >$LIBDIR/kernel
 hostname -f >$LIBDIR/hostname
+ip route get 1 | awk '{print $NF;exit}' >$LIBDIR/clientip
 blkid -c /dev/null -o value -s UUID /dev/mmcblk0p1 >$LIBDIR/mmcblk0p1.uuid
 blkid -c /dev/null -o value -s UUID /dev/mmcblk0p2 >$LIBDIR/mmcblk0p2.uuid
 blkid -c /dev/null -o value -s TYPE /dev/mmcblk0p1 >$LIBDIR/mmcblk0p1.fstype
